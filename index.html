@@ -84,9 +84,16 @@
 
 <body class="bg-gradient-to-br from-red-900 via-red-700 to-red-500 min-h-screen flex items-center justify-center relative">
 
+<!-- 👆 Interaction Overlay -->
+<div id="overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 transition-opacity duration-500">
+  <button onclick="startExperience()" class="bg-white text-red-600 px-8 py-3 rounded-full font-bold text-xl shadow-lg hover:scale-105 transition-transform">
+    Click to Open ❤️
+  </button>
+</div>
+
 <!-- 🎵 Auto Music -->
 <audio id="music" autoplay muted loop>
-  <source src="romantic-music.mp3" type="audio/mpeg">
+  <source src="./romatic-music.mp3" type="audio/mpeg">
 </audio>
 
 <!-- 🌹 20 Petals -->
@@ -148,17 +155,14 @@ You are my favorite feeling, my sweetest thought,
 <script>
   const music = document.getElementById("music");
 
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      music.muted = false;
-      music.play().catch(() => {});
-    }, 1200);
-  });
-
-  document.addEventListener("touchstart", () => {
+  function startExperience() {
+    const overlay = document.getElementById('overlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.style.display = 'none', 500);
+    
     music.muted = false;
-    music.play();
-  }, { once: true });
+    music.play().catch(e => console.log("Playback failed:", e));
+  }
 
   // Mobile Slideshow Logic
   let currentIndex = 0;
