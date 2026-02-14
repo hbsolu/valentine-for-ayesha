@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Valentine’s Day Ayesha ❤️</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  body { overflow: hidden; }
+
+  /* 💓 Heartbeat */
+  .heartbeat {
+    animation: beat 0.85s infinite;
+  }
+
+  @keyframes beat {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.18); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+  }
+
+  /* 🌹 Rose Petals */
+  .petal {
+    position: absolute;
+    top: -40px;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle at top left, #ffb3c1, #c9184a);
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(45deg);
+    animation: fall 12s linear infinite;
+    opacity: 0.75;
+  }
+
+  /* ❤️ Hearts */
+  .heart {
+    position: absolute;
+    top: -30px;
+    width: 18px;
+    height: 18px;
+    background: red;
+    transform: rotate(45deg);
+    animation: fall 10s linear infinite;
+    opacity: 0.6;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: red;
+    border-radius: 50%;
+  }
+
+  .heart::before { top: -9px; }
+  .heart::after { left: -9px; }
+
+  @keyframes fall {
+    from {
+      transform: translateY(0) rotate(0deg);
+    }
+    to {
+      transform: translateY(120vh) rotate(360deg);
+    }
+  }
+
+  /* ✨ Fade In */
+  .fade-in {
+    animation: fadeIn 1.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body class="bg-gradient-to-br from-red-900 via-red-700 to-red-500 min-h-screen flex items-center justify-center relative">
+
+<!-- 🎵 Auto Music -->
+<audio id="music" autoplay muted loop>
+  <source src="romantic-music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🌹 20 Petals -->
+<div class="absolute inset-0 pointer-events-none">
+  <!-- Generate petals manually -->
+  <!-- You can adjust delays for variation -->
+  <!-- Petals -->
+  <!-- 1–20 -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      document.write(
+        `<div class="petal" style="left:${Math.random()*100}%; animation-delay:${Math.random()*10}s;"></div>`
+      );
+    }
+  </script>
+</div>
+
+<!-- ❤️ 20 Hearts -->
+<div class="absolute inset-0 pointer-events-none">
+  <script>
+    for (let i = 0; i < 20; i++) {
+      document.write(
+        `<div class="heart" style="left:${Math.random()*100}%; animation-delay:${Math.random()*8}s;"></div>`
+      );
+    }
+  </script>
+</div>
+
+<!-- 💝 Main Card -->
+<div class="relative z-10 max-w-md w-full mx-4 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-6 text-center fade-in">
+
+  <div class="heartbeat inline-block mb-4">
+    <span class="text-5xl">❤️</span>
+  </div>
+
+  <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">
+    Happy Valentine’s Day
+  </h1>
+
+  <h2 class="text-xl text-pink-200 mb-4">
+    Ayesha 💖
+  </h2>
+
+  <p class="text-pink-100 mb-6 text-sm md:text-base">
+You are my favorite feeling, my sweetest thought,
+      and my forever kind of love ❤️
+  </p>
+
+  <!-- Desktop Grid / Mobile Slideshow -->
+  <div class="relative overflow-hidden rounded-xl h-64 md:h-48">
+    <div id="slideshow" class="flex md:grid md:grid-cols-3 gap-3 transition-transform duration-700 ease-in-out h-full">
+      <img src="./photo1.jpg" class="min-w-full md:min-w-0 rounded-xl h-full object-contain bg-black/20 hover:scale-105 transition">
+      <img src="./photo2.jpg" class="min-w-full md:min-w-0 rounded-xl h-full object-contain bg-black/20 hover:scale-105 transition">
+      <img src="./photo3.jpg" class="min-w-full md:min-w-0 rounded-xl h-full object-contain bg-black/20 hover:scale-105 transition">
+    </div>
+  </div>
+</div>
+
+<script>
+  const music = document.getElementById("music");
+
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      music.muted = false;
+      music.play().catch(() => {});
+    }, 1200);
+  });
+
+  document.addEventListener("touchstart", () => {
+    music.muted = false;
+    music.play();
+  }, { once: true });
+
+  // Mobile Slideshow Logic
+  let currentIndex = 0;
+  const slideshow = document.getElementById('slideshow');
+  const totalSlides = 3;
+
+  setInterval(() => {
+    if (window.innerWidth < 768) { // Only slide on mobile
+      currentIndex = (currentIndex + 1) % totalSlides;
+      slideshow.style.transform = `translateX(-${currentIndex * 100}%)`;
+    } else {
+      slideshow.style.transform = `translateX(0)`;
+    }
+  }, 5000);
+</script>
+
+</body>
+</html>
